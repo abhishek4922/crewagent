@@ -1,0 +1,5 @@
+numpy==1.25.0
+crewai
+crewai-tools
+langchain_openai
+langchain_community
