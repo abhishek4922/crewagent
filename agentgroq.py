@@ -2,13 +2,14 @@ import os
 from dotenv import load_dotenv
 from crewai import Agent,Task, Crew
 from crewai.tools import SuperDevTool
-from langchain_openai import ChatOpenAI
+from langchain_groq import Chatgroq
 
 
 load_dotenv()
 
 SERPER_API_KEY=os.getenv("SERPER_API_KEY")
-OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
+# OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
+GROQ_API_KEY=os.getenv("GROQ_API_KEY")
 
 
 search_tool=SuperDevTool()
