@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from crewai import Agent,Task, Crew
-from crewai.tools import SuperDevTool
+from crewai_tools import SerperDevTool
 from langchain_openai import ChatOpenAI
 
 
@@ -11,10 +11,11 @@ SERPER_API_KEY=os.getenv("SERPER_API_KEY")
 OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 
 
-search_tool=SuperDevTool()
-llm = ChatOpenAI('model=gpt-3.5-turbo')
+search_tool=SerperDevTool()
+
 
 def create_research_agent():
+    llm = ChatOpenAI(model="gpt-3.5-turbo")
     return Agent(
         role='research agent specialist',
         goal='conduct through research on the given topic',
@@ -34,8 +35,8 @@ def research_agent_task(agent,topic):
     )
 def run_research(topic):
     agent = create_research_agent()
-    task = research_agent_task()
-    crew = Crew(agent=[agent],task=[task])
+    task = research_agent_task(agent,topic)
+    crew = Crew(agents=[agent],tasks=[task])
     results = crew.kickoff()
 
     return results
